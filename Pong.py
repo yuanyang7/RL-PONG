@@ -16,8 +16,8 @@ INITIAL_EPSILON = 1.0 # starting value of epsilon
 EPSILON_DECAY = 0.995
 BATCH_SIZE = 32
 def chooseAction(epsilon,observation_stack,sess,s,readout):            
-    if np.random.rand() <= epsilon:
-        action = np.random.choice([0,1,2])#?
+    if random.random() <= epsilon:
+        action = random.randrange(ACTIONS)#?
     else:
         actions_value = readout.eval(feed_dict={s: [observation_stack]})[0]#todo
         action = np.argmax(actions_value) 
