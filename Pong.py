@@ -5,6 +5,7 @@ import gym
 import cv2
 import random
 from collections import deque
+import time
 
 MAX_EPISODE = 1
 GAMMA = 0.99 #discount factor for reward
@@ -104,6 +105,7 @@ def playGame(s, readout, h_fc1, sess):
     h_file = open("logs_" + "pong" + "/hidden.txt", 'w')
 
     observation = env.reset() #get image
+    time.sleep(0.1)
     observation = convertScreens(observation)
     observation_stack = np.asarray([observation,observation,observation,observation]) #80 80 4
     observation_stack = np.swapaxes(observation_stack,0,2)    
