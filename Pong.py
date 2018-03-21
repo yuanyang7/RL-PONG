@@ -125,6 +125,7 @@ def playGame(s, readout, h_fc1, sess):
 
         while True:     
             env.render()
+            time.sleep(0.1)
             #choose action
             action = chooseAction(epsilon,observation_stack,sess,s,readout)
                 #decay epsilon
