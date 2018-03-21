@@ -19,8 +19,6 @@ def chooseAction(epsilon,observation_stack,sess,s,readout):
         action = np.random.choice([0,1,2])#?
     else:
         actions_value = readout.eval(feed_dict={s: [observation_stack]})[0]#todo
-
-        print(np.shape(actions_value))
         action = np.argmax(actions_value) 
     return action
 def weight_variable(shape):
@@ -160,9 +158,7 @@ def playGame(s, readout, h_fc1, sess):
                     else:
                         y_batch.append(r_batch[i] + GAMMA * np.max(readout_j1_batch[i])) #todo: ? not reward
 
-                # perform gradient step
-                print(np.shape(a_batch))
-                print(np.shape(s_j_batch))
+                # perform gradient step\
                 train_step.run(feed_dict = {
                     y : y_batch,
                     a : a_batch,
@@ -171,8 +167,8 @@ def playGame(s, readout, h_fc1, sess):
             observation_stack = observation_stack_
             step  = step + 1
             print ("TIMESTEP", step,  "/ EPSILON", epsilon, "/ ACTION", action, "/ REWARD", reward)
-            if step % 1000 == 0:
-                saver.save(sess, 'saved_networks/' + 'pong' + '-dqn' + step, global_step = step)
+            if step % 10000 == 0:
+                saver.save(sess, 'saved_networks/' + 'pong' + '-dqn' + str(step), global_step = step)
 
             #if teminate?
             if done:
