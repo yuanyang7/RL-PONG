@@ -124,8 +124,6 @@ def playGame(s, readout, h_fc1, sess):
     while "RL" != "LR":
 
         while True:     
-            env.render()
-            time.sleep(0.1)
             #choose action
             action = chooseAction(epsilon,observation_stack,sess,s,readout)
                 #decay epsilon
@@ -133,6 +131,10 @@ def playGame(s, readout, h_fc1, sess):
                 epsilon *= DECAY_RATE
             #return reward, next s
             next_state, reward, done, _ = env.step(action + 1)
+
+            env.render()
+            
+            time.sleep(0.1)
             next_state = convertScreens(next_state) #80,80
             next_state = np.reshape(next_state, (1,80,80))
             next_state = np.swapaxes(next_state,0,2)
